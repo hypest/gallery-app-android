@@ -1,5 +1,7 @@
 package gallery.templates.contentful.gallery;
 
+import android.content.ClipData;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
+import com.contentful.vault.Asset;
 import com.squareup.picasso.Picasso;
 import gallery.templates.contentful.R;
 import gallery.templates.contentful.lib.Utils;
@@ -111,8 +115,25 @@ public class GalleryAdapter extends RecyclerView.Adapter {
     loadPhoto(holder.cover, gallery.coverImage().url());
   }
 
-  private void onBindItem(ItemViewHolder holder, int position) {
+  private void onBindItem(ItemViewHolder holder, final int position) {
     loadPhoto(holder.photo, ((Image) data.get(position)).photo().url());
+
+    holder.photo.setOnLongClickListener(new View.OnLongClickListener() {
+      @Override
+      public boolean onLongClick(View view) {
+        final Image image = (Image) data.get(position);
+        final Asset photo = image.photo();
+
+        ClipData.Item item = new ClipData.Item(Uri.parse(photo.url()));
+        String[] mimeTypes = {photo.mimeType()};
+        ClipData dragData = new ClipData(image.title(), mimeTypes, item);
+
+        view.startDragAndDrop(dragData, new View.DragShadowBuilder(view), null, View.DRAG_FLAG_GLOBAL | View
+                .DRAG_FLAG_GLOBAL_URI_READ);
+
+        return true;
+      }
+    });
   }
 
   private void loadPhoto(ImageView imageView, String url) {
