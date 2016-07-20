@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-  compileSdkVersion 22
-  buildToolsVersion "22.0.1"
+  compileSdkVersion 24
+  buildToolsVersion "24.0.0"
 
   packagingOptions {
     exclude 'META-INF/services/javax.annotation.processing.Processor'
@@ -12,8 +12,8 @@ android {
   }
   defaultConfig {
     applicationId "gallery.templates.contentful"
-    minSdkVersion 14
-    targetSdkVersion 22
+    minSdkVersion 24
+    targetSdkVersion 24
     versionCode 2
     versionName "1.1"
   }
@@ -27,10 +27,10 @@ android {
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile 'com.android.support:appcompat-v7:22.1.1'
-  compile 'com.android.support:recyclerview-v7:22.1.1'
-  compile 'com.android.support:cardview-v7:22.1.1'
-  compile 'com.android.support:palette-v7:22.1.1'
+  compile 'com.android.support:appcompat-v7:24.0.0'
+  compile 'com.android.support:recyclerview-v7:24.0.0'
+  compile 'com.android.support:cardview-v7:24.0.0'
+  compile 'com.android.support:palette-v7:24.0.0'
   compile 'com.squareup.okhttp:okhttp:2.3.0'
   compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
   compile 'com.jakewharton:butterknife:6.1.0'
